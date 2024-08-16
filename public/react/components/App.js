@@ -40,7 +40,9 @@ const App = () => {
     return <Page currentPage={currentPage} setCurrentPage={setCurrentPage} />;
   }
 
-  return <Home pages={pages} handleClick={handleClick} />;
+  return (
+    <Home pages={pages} fetchPages={fetchPages} handleClick={handleClick} />
+  );
 };
 
 export default App;
