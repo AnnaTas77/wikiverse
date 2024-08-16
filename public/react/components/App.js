@@ -37,7 +37,13 @@ const App = () => {
   }, [currentPage]);
 
   if (currentPage) {
-    return <Page currentPage={currentPage} setCurrentPage={setCurrentPage} />;
+    return (
+      <Page
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        fetchPages={fetchPages}
+      />
+    );
   }
 
   return (

@@ -1,6 +1,25 @@
 import React from "react";
+import apiURL from "../api";
 
-function Page({ currentPage, setCurrentPage }) {
+function Page({ currentPage, setCurrentPage, fetchPages }) {
+  const handleDelete = async () => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this page?"
+    );
+
+    if (!isConfirmed) return;
+
+    //send a DELETE request to /wiki/:slug
+    await fetch(apiURL + "/wiki/" + currentPage.slug, {
+      method: "DELETE",
+    });
+
+    await fetchPages();
+
+    // Return to the home page
+    setCurrentPage(null);
+  };
+
   return (
     <main>
       <a
@@ -28,6 +47,7 @@ function Page({ currentPage, setCurrentPage }) {
           <li key={tag.id}>{tag.name}</li>
         ))}
       </ul>
+      <button onClick={handleDelete}>Delete Page</button>
     </main>
   );
 }
