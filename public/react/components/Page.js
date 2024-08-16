@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import apiURL from "../api";
+import EditForm from "./EditForm";
 
 function Page({ currentPage, setCurrentPage, fetchPages }) {
   const [isEditingPage, setIsEditingPage] = useState(false);
@@ -57,6 +58,14 @@ function Page({ currentPage, setCurrentPage, fetchPages }) {
         Update Page
       </button>{" "}
       <button onClick={handleDelete}>Delete Page</button>
+      {isEditingPage && (
+        <EditForm
+          slug={currentPage.slug}
+          fetchPages={fetchPages}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      )}
     </main>
   );
 }

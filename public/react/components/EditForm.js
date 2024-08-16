@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import apiURL from "../api";
 
-const EditForm = () => {
+const EditForm = ({ slug, fetchPages, currentPage, setCurrentPage }) => {
   const [data, setData] = useState({
-    title: "",
-    content: "",
-    name: "",
-    email: "",
-    tags: "",
+    title: currentPage.title,
+    content: currentPage.content,
+    name: currentPage.author.name,
+    email: currentPage.author.email,
+    tags: currentPage.tags.map((tag) => tag.name).join(" "),
   });
 
   const handleChange = (event) => {
@@ -18,15 +18,37 @@ const EditForm = () => {
   };
 
   const handleSubmit = async (event) => {
+    // prevent the form from submitting to the server
     event.preventDefault();
+
+    // Send a PUT request to /api/wiki/:slug
+    // event.target.action comes from the action tag in the <form>
+
+    const response = await fetch(event.target.action, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    // Update the current page
+    const editedPage = await response.json();
+    setCurrentPage(editedPage);
+
+    // Fetch the updated list of pages
+    await fetchPages();
   };
 
   return (
-    <form action={`${apiURL}/wiki`} method="POST" onSubmit={handleSubmit}>
+    <form
+      action={`${apiURL}/wiki/${slug}`}
+      method="POST"
+      onSubmit={handleSubmit}
+    >
       <p>
         <label htmlFor="title">Title</label>
         <input
-          required={true}
           type="text"
           name="title"
           id="title"
@@ -37,7 +59,6 @@ const EditForm = () => {
       <p>
         <label htmlFor="content">Content</label>
         <textarea
-          required={true}
           name="content"
           id="content"
           value={data.content}
@@ -47,7 +68,6 @@ const EditForm = () => {
       <p>
         <label htmlFor="name">Name</label>
         <input
-          required={true}
           type="text"
           name="name"
           id="name"
@@ -58,7 +78,6 @@ const EditForm = () => {
       <p>
         <label htmlFor="email">Email</label>
         <input
-          required={true}
           type="email"
           name="email"
           id="email"
@@ -69,7 +88,6 @@ const EditForm = () => {
       <p>
         <label htmlFor="tags">Tags</label>
         <input
-          required={true}
           type="text"
           name="tags"
           id="tags"
@@ -78,7 +96,7 @@ const EditForm = () => {
         />
       </p>
       <p>
-        <button type="submit">Add page</button>
+        <button type="submit">Edit Page</button>
       </p>
     </form>
   );
