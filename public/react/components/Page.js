@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import apiURL from "../api";
 
 function Page({ currentPage, setCurrentPage, fetchPages }) {
+  const [isEditingPage, setIsEditingPage] = useState(false);
+
   const handleDelete = async () => {
     const isConfirmed = window.confirm(
       "Are you sure you want to delete this page?"
@@ -47,6 +49,13 @@ function Page({ currentPage, setCurrentPage, fetchPages }) {
           <li key={tag.id}>{tag.name}</li>
         ))}
       </ul>
+      <button
+        onClick={() => {
+          setIsEditingPage(!isEditingPage);
+        }}
+      >
+        Update Page
+      </button>{" "}
       <button onClick={handleDelete}>Delete Page</button>
     </main>
   );

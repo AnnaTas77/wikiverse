@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Form from "./Form";
+import CreateForm from "./CreateForm";
 
 function Home({ pages, handleClick, fetchPages }) {
   const [isAddingPage, setIsAddingPage] = useState(false);
@@ -24,7 +24,9 @@ function Home({ pages, handleClick, fetchPages }) {
         Toggle Form
       </button>
 
-      {isAddingPage && <Form hideForm={hideForm} fetchPages={fetchPages} />}
+      {isAddingPage && (
+        <CreateForm hideForm={hideForm} fetchPages={fetchPages} />
+      )}
 
       <ul className="pageList">
         {pages.map((page) => (
