@@ -14,10 +14,10 @@ function Page({ currentPage, setCurrentPage }) {
       </a>
       <h1>{currentPage.title}</h1>
       <p>
-        <b>Author:</b> {currentPage.author.name}
+        <b>Author: </b> {currentPage.author.name}
       </p>
       <p>
-        <b>Published:</b>
+        <b>Published: </b>
         {new Date(currentPage.createdAt).toLocaleDateString()}
       </p>
       <p>

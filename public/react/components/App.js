@@ -27,6 +27,14 @@ const App = () => {
     fetchPages();
   }, [fetchPages]);
 
+  useEffect(() => {
+    if (currentPage) {
+      document.title = `${currentPage.title} - Wikiverse`;
+    } else {
+      document.title = "Wikiverse";
+    }
+  }, [currentPage]);
+
   if (currentPage) {
     return <Page currentPage={currentPage} setCurrentPage={setCurrentPage} />;
   }
