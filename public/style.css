@@ -20,6 +20,11 @@ textarea {
   display: block;
 }
 
+/* grayed out form fields in EditForm.js */
+[readOnly]{
+  background-color:rgb(220, 220, 220)
+}
+
 input,
 textarea {
   width: 100%;

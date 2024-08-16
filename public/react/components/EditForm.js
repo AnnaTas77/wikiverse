@@ -72,7 +72,7 @@ const EditForm = ({ slug, fetchPages, currentPage, setCurrentPage }) => {
           name="name"
           id="name"
           value={data.name}
-          onChange={handleChange}
+          readOnly={true}
         />
       </p>
       <p>
@@ -82,7 +82,7 @@ const EditForm = ({ slug, fetchPages, currentPage, setCurrentPage }) => {
           name="email"
           id="email"
           value={data.email}
-          onChange={handleChange}
+          readOnly={true}
         />
       </p>
       <p>
