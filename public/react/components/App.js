@@ -27,6 +27,7 @@ const App = () => {
     fetchPages();
   }, [fetchPages]);
 
+  // this effect will run only when there is change in the current page state
   useEffect(() => {
     if (currentPage) {
       document.title = `${currentPage.title} - Wikiverse`;

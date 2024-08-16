@@ -1,21 +1,21 @@
-import React, { useState } from 'react'
-import apiURL from '../api'
+import React, { useState } from "react";
+import apiURL from "../api";
 
 const Form = () => {
   const [data, setData] = useState({
-    title: '',
-    content: '',
-    name: '',
-    email: '',
-    tags: ''
-  })
+    title: "",
+    content: "",
+    name: "",
+    email: "",
+    tags: "",
+  });
 
   const handleChange = (event) => {
     setData({
       ...data,
-      [event.target.name]: event.target.value
-    })
-  }
+      [event.target.name]: event.target.value,
+    });
+  };
 
   return (
     <form action={`${apiURL}/wiki`} method="POST">
@@ -77,7 +77,7 @@ const Form = () => {
         <button type="submit">Add page</button>
       </p>
     </form>
-  )
-}
+  );
+};
 
-export default Form
+export default Form;
